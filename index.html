@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madinam Uchun ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Umumiy uslublar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff5f8; /* Ochiq pushti fon */
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Konvert uslubi */
+        .envelope-wrapper {
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #ff7675; /* Qizil-pushti rang */
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .envelope:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-top: 110px solid #ff8e8c;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.4s 0.2s;
+        }
+
+        .envelope:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 100px solid transparent;
+            border-right: 150px solid #ff6b6b;
+            border-bottom: 100px solid #ff6b6b;
+            border-left: 150px solid #ff6b6b;
+            border-radius: 10px;
+        }
+
+        /* Xat uslubi (ichkarida yashiringan) */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            width: 90%;
+            height: 80%;
+            background: #fff;
+            margin: 0 5%;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1;
+            transition: transform 0.4s;
+            text-align: center;
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
+        }
+
+        .letter h1 {
+            font-family: 'Great Vibes', cursive; /* Chiroyli yozma shrift */
+            color: #d63031;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .letter p {
+            font-size: 0.9rem;
+            color: #2d3436;
+            line-height: 1.5;
+        }
+
+        /* Konvert ochilgandagi holat */
+        .envelope-wrapper.open .envelope:before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translateY(-120px);
+            z-index: 2;
+            height: auto;
+            padding-bottom: 30px;
+        }
+
+        /* Yurakchalar animatsiyasi */
+        .heart {
+            position: fixed;
+            color: #ff7675;
+            font-size: 20px;
+            position: absolute;
+            top: -10vh;
+            transform: translateY(0);
+            animation: fall 3s linear forwards;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+
+        /* Yozuv */
+        .instruction {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.8rem;
+            color: #fab1a0;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" onclick="openLetter(this)">
+        <div class="envelope"></div>
+        <div class="letter">
+            <h1>Madinam ❤️</h1>
+            <p>
+                Bu dunyoda men uchun eng qadrli insonga!<br><br>
+                Sening tabassuming kunimni yoritadi, sening borliging esa hayotimni ma'noga to'ldiradi. 
+                Seni hammadan ko'ra ko'proq sevaman. ❤️<br><br>
+                Har doim yonimda bo'l, mening baxtim.
+            </p>
+        </div>
+    </div>
+
+    <div class="instruction">Ochish uchun ustiga bosing...</div>
+
+    <script>
+        // Xatni ochish funksiyasi
+        function openLetter(element) {
+            element.classList.toggle('open');
+            document.querySelector('.instruction').style.display = 'none';
+            if(element.classList.contains('open')) {
+                // Konvert ochilganda yurakchalar yomg'irini boshlash
+                for(let i=0; i<30; i++) {
+                    createHeart();
+                }
+            }
+        }
+
+        // Yurakcha yaratish funksiyasi
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            // Tasodifiy joylashuv va tezlik
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // 3s dan 5s gacha
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px'; // 10px dan 30px gacha
+            
+            document.body.appendChild(heart);
+
+            // Animatsiya tugagach o'chirib tashlash
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
