@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madina uchun maxsus... ✨</title>
+    <title>Madinam uchun... ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        /* CSS QISMI */
         :root {
             --gold: #d4af37;
-            --dark-blue: #0a0b10;
-            --glass: rgba(255, 255, 255, 0.1);
+            --dark-bg: #0d1117;
+            --glass: rgba(255, 255, 255, 0.08);
         }
 
         body {
@@ -18,187 +18,192 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
             color: white;
-        }
-
-        /* Yulduzli osmon effekti */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        /* Markaziy karta */
-        .card {
-            position: relative;
-            z-index: 10;
-            width: 350px;
-            padding: 40px;
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
             text-align: center;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: 0.5s;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
+        /* Orqa fon effektlari */
+        .bg-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
 
-        .flower-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-            display: block;
-            filter: drop-shadow(0 0 10px var(--gold));
-            animation: float 3s ease-in-out infinite;
+        /* Konteynerlar */
+        .step {
+            display: none; /* Dastlab hamma yashirin */
+            padding: 30px;
+            max-width: 500px;
+            animation: fadeIn 1.5s ease forwards;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        .active {
+            display: block; /* Faqat aktiv qadam ko'rinadi */
         }
 
         h1 {
-            font-weight: 300;
-            letter-spacing: 4px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
             color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        .secret-text {
-            height: 0;
-            overflow: hidden;
-            transition: 1s ease;
-            opacity: 0;
-            font-style: italic;
+        p {
+            font-size: 1.2rem;
             line-height: 1.8;
-            color: #e0e0e0;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
-        .card.active .secret-text {
-            height: auto;
-            opacity: 1;
-            margin-top: 20px;
-        }
-
-        .card.active .flower-icon {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        /* Pastki tugma */
-        .btn-magic {
-            margin-top: 20px;
-            padding: 10px 25px;
-            background: none;
+        /* Tugma uslubi */
+        .btn-next {
+            padding: 12px 35px;
+            background: transparent;
             border: 1px solid var(--gold);
             color: var(--gold);
-            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: 0.3s;
+            border-radius: 50px;
+            transition: 0.4s;
         }
 
-        .btn-magic:hover {
+        .btn-next:hover {
             background: var(--gold);
             color: black;
+            box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Sparkles (Yulduzchalar) */
-        .sparkle {
+        /* Taymer uslubi */
+        .timer-container {
+            margin-top: 20px;
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .timer-box span {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .timer-box small {
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Yurakchalar */
+        .heart {
             position: absolute;
-            background: white;
-            border-radius: 50%;
+            color: rgba(255, 77, 109, 0.6);
             pointer-events: none;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="stars" id="starField"></div>
+    <div class="bg-glow"></div>
 
-    <div class="card" id="mainCard" onclick="revealMagic()">
-        <span class="flower-icon">🌹</span>
-        <h1>Madina</h1>
-        <p style="font-size: 14px; opacity: 0.7;">Ustiga bosing...</p>
+    <div class="step active" id="step1">
+        <h1>Salom Go'zalim Madina! 👋</h1>
+        <p>Senga kichik bir syurpriz tayyorladim...</p>
+        <button class="btn-next" onclick="nextStep(2)">Davom eting</button>
+    </div>
+
+    <div class="step" id="step2">
+        <h1>Madinam ✨</h1>
+        <p>Siz dunyodagi eng chiroyli va yagona qizsiz!</p>
         
-        <div class="secret-text" id="message">
-            "Sen yulduzlar orasidagi eng yorqinisan. Sening borliging dunyoni go'zallashtiradi. Bu mitti sahifa sening sharafingga yaratildi..."
-            <br><br>
-            <strong>Har doim tabassum qil! ✨</strong>
+        <div style="font-style: italic; margin-bottom: 20px; opacity: 0.9;">
+            "Sen mening hayotimdagi eng go'zal mo''jizasan. Sening borliging dunyoni nurga to'ldiradi."
+        </div>
+
+        <div class="timer-container">
+            <div style="font-size: 0.8rem; letter-spacing: 1px;">BIZ BIRGAMIZ:</div>
+            <div class="timer-grid" id="timer">
+                </div>
         </div>
         
-        <button class="btn-magic">Sehrni ko'rish</button>
+        <p style="margin-top: 30px; font-size: 0.9rem; color: var(--gold);">Har doim yonimda bo'l ❤️</p>
     </div>
 
     <script>
-        // JAVASCRIPT QISMI
-
-        // 1. Dinamik yulduzlar yaratish
-        function createStars() {
-            const field = document.getElementById('starField');
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'sparkle';
-                const size = Math.random() * 3;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.opacity = Math.random();
-                star.style.boxShadow = `0 0 ${Math.random() * 10}px white`;
-                field.appendChild(star);
-            }
-        }
-
-        // 2. Sehrli effekt (bosilganda)
-        function revealMagic() {
-            const card = document.getElementById('mainCard');
-            card.classList.toggle('active');
+        // 1. Qadamlarni almashtirish funksiyasi
+        function nextStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + stepNumber).classList.add('active');
             
-            // Bosilganda atrofga yulduzcha sochish
-            for(let i=0; i<20; i++) {
-                createFirework();
+            if(stepNumber === 2) {
+                startHearts();
+                setInterval(updateTimer, 1000);
             }
         }
 
-        function createFirework() {
-            const f = document.createElement('div');
-            f.innerHTML = '✨';
-            f.style.position = 'fixed';
-            f.style.left = '50%';
-            f.style.top = '50%';
-            f.style.pointerEvents = 'none';
-            f.style.transition = '2s';
-            document.body.appendChild(f);
+        // 2. Taymer: 2024-yil 12-oktabr
+        const startDate = new Date(2024, 9, 12); // Yanvar=0, Oktabr=9
 
-            const x = (Math.random() - 0.5) * 400;
-            const y = (Math.random() - 0.5) * 400;
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
 
-            setTimeout(() => {
-                f.style.transform = `translate(${x}px, ${y}px) scale(0)`;
-                f.style.opacity = '0';
-            }, 10);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
 
-            setTimeout(() => f.remove(), 2000);
+            const timerDiv = document.getElementById("timer");
+            if(timerDiv) {
+                timerDiv.innerHTML = `
+                    <div class="timer-box"><span>${days}</span><small>KUN</small></div>
+                    <div class="timer-box"><span>${hours}</span><small>SOAT</small></div>
+                    <div class="timer-box"><span>${mins}</span><small>DAQIQA</small></div>
+                    <div class="timer-box"><span>${secs}</span><small>SONIYA</small></div>
+                `;
+            }
         }
 
-        window.onload = createStars;
+        // 3. Yurakchalar effekti
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.bottom = '-5vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 400);
+        }
     </script>
 </body>
 </html>
