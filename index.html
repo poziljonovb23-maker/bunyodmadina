@@ -3,195 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madinam Uchun ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Madinam Uchun Maxsus ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        /* Umumiy uslublar */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-pink: #ff85a1;
+            --dark-bg: #1a0a10;
         }
 
-        body {
-            background-color: #fff5f8; /* Ochiq pushti fon */
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
         }
 
-        /* Konvert uslubi */
-        .envelope-wrapper {
-            cursor: pointer;
-            transition: transform 0.4s ease;
-        }
-
-        .envelope-wrapper:hover {
-            transform: scale(1.05);
-        }
-
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background: #ff7675; /* Qizil-pushti rang */
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .envelope:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            z-index: 2;
-            border-top: 110px solid #ff8e8c;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            transform-origin: top;
-            transition: transform 0.4s 0.2s;
-        }
-
-        .envelope:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 0;
-            border-top: 100px solid transparent;
-            border-right: 150px solid #ff6b6b;
-            border-bottom: 100px solid #ff6b6b;
-            border-left: 150px solid #ff6b6b;
-            border-radius: 10px;
-        }
-
-        /* Xat uslubi (ichkarida yashiringan) */
-        .letter {
-            position: absolute;
-            bottom: 0;
-            width: 90%;
-            height: 80%;
-            background: #fff;
-            margin: 0 5%;
-            padding: 20px;
-            border-radius: 5px;
-            z-index: 1;
-            transition: transform 0.4s;
-            text-align: center;
-            box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
-        }
-
-        .letter h1 {
-            font-family: 'Great Vibes', cursive; /* Chiroyli yozma shrift */
-            color: #d63031;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .letter p {
-            font-size: 0.9rem;
-            color: #2d3436;
-            line-height: 1.5;
-        }
-
-        /* Konvert ochilgandagi holat */
-        .envelope-wrapper.open .envelope:before {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-
-        .envelope-wrapper.open .letter {
-            transform: translateY(-120px);
-            z-index: 2;
-            height: auto;
-            padding-bottom: 30px;
-        }
-
-        /* Yurakchalar animatsiyasi */
-        .heart {
+        /* Orqa fondagi yulduzlar */
+        #stars {
             position: fixed;
-            color: #ff7675;
-            font-size: 20px;
-            position: absolute;
-            top: -10vh;
-            transform: translateY(0);
-            animation: fall 3s linear forwards;
-            opacity: 0.8;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
             z-index: 10;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(110vh);
-                opacity: 0;
-            }
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
         }
 
-        /* Yozuv */
-        .instruction {
-            position: absolute;
-            bottom: 30px;
+        .typing-container {
+            min-height: 80px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #ffdae0;
+        }
+
+        /* Taymer qismi */
+        .timer-title {
             font-size: 0.8rem;
-            color: #fab1a0;
-            animation: blink 1.5s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            color: var(--soft-pink);
         }
 
-        @keyframes blink {
-            50% { opacity: 0.5; }
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .timer-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timer-item span:first-child {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .timer-item span:last-child {
+            font-size: 0.6rem;
+            opacity: 0.7;
+        }
+
+        /* Musiqa tugmasi */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-pink);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--primary-pink);
+            z-index: 100;
+        }
+
+        /* Yurakcha animatsiyasi */
+        .floating-heart {
+            position: absolute;
+            color: var(--primary-pink);
+            pointer-events: none;
+            animation: moveUp 4s linear infinite;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="envelope-wrapper" onclick="openLetter(this)">
-        <div class="envelope"></div>
-        <div class="letter">
-            <h1>Madinam ❤️</h1>
-            <p>
-                Bu dunyoda men uchun eng qadrli insonga!<br><br>
-                Sening tabassuming kunimni yoritadi, sening borliging esa hayotimni ma'noga to'ldiradi. 
-                Seni hammadan ko'ra ko'proq sevaman. ❤️<br><br>
-                Har doim yonimda bo'l, mening baxtim.
-            </p>
-        </div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="stars"></div>
+
+    <div class="main-card">
+        <h1>Madinam ❤️</h1>
+        
+        <div class="typing-container" id="typewriter"></div>
+
+        <div class="timer-title">Biz birgamiz:</div>
+        <div id="timer">
+            </div>
     </div>
 
-    <div class="instruction">Ochish uchun ustiga bosing...</div>
+    <div class="music-control" onclick="toggleMusic()">
+        🎵
+    </div>
 
     <script>
-        // Xatni ochish funksiyasi
-        function openLetter(element) {
-            element.classList.toggle('open');
-            document.querySelector('.instruction').style.display = 'none';
-            if(element.classList.contains('open')) {
-                // Konvert ochilganda yurakchalar yomg'irini boshlash
-                for(let i=0; i<30; i++) {
-                    createHeart();
-                }
+        // 1. Yozuv mashinkasi effekti
+        const text = "Sen mening hayotimdagi eng go'zal mo''jizasan. Har bir soniya sen bilan baxtliroqman. Bu kichik sovg'a sening tabassuming uchun...";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
             }
         }
 
-        // Yurakcha yaratish funksiyasi
+        // 2. Taymer (Tanishgan kuningizni kiriting: YIL, OY (0-11), KUN)
+        const startDate = new Date(2023, 5, 15); // Masalan: 15-iyun, 2023-yil
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("timer").innerHTML = `
+                <div class="timer-item"><span>${days}</span><span>Kun</span></div>
+                <div class="timer-item"><span>${hours}</span><span>Soat</span></div>
+                <div class="timer-item"><span>${mins}</span><span>Daqiqah</span></div>
+                <div class="timer-item"><span>${secs}</span><span>Soniya</span></div>
+            `;
+        }
+
+        // 3. Floating Hearts (Uchuvchi yuraklar)
         function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
+            heart.className = 'floating-heart';
             heart.innerHTML = '❤️';
-            // Tasodifiy joylashuv va tezlik
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // 3s dan 5s gacha
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px'; // 10px dan 30px gacha
-            
+            heart.style.bottom = '-5vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.duration = (Math.random() * 2 + 3) + 's';
             document.body.appendChild(heart);
-
-            // Animatsiya tugagach o'chirib tashlash
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => heart.remove(), 4000);
         }
+
+        // 4. Musiqa boshqaruvi
+        function toggleMusic() {
+            const audio = document.getElementById("bgMusic");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Ishga tushirish
+        window.onload = () => {
+            typeWriter();
+            setInterval(updateTimer, 1000);
+            setInterval(createHeart, 300);
+        };
     </script>
 </body>
 </html>
