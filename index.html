@@ -9,7 +9,6 @@
         :root {
             --gold: #d4af37;
             --dark-bg: #0d1117;
-            --glass: rgba(255, 255, 255, 0.08);
         }
 
         body {
@@ -25,24 +24,11 @@
             text-align: center;
         }
 
-        /* Orqa fon effektlari */
-        .bg-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-
-        /* Konteynerlar */
+        /* Sahifalar (Qadamlar) */
         .step {
             display: none; /* Dastlab hamma yashirin */
-            padding: 30px;
-            max-width: 500px;
-            animation: fadeIn 1.5s ease forwards;
+            padding: 20px;
+            animation: fadeIn 1s ease forwards;
         }
 
         .active {
@@ -51,30 +37,29 @@
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--gold);
             margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         p {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.3rem;
+            line-height: 1.6;
             margin-bottom: 30px;
-            font-weight: 300;
         }
 
-        /* Tugma uslubi */
+        /* Tugma dizayni */
         .btn-next {
-            padding: 12px 35px;
+            padding: 15px 40px;
             background: transparent;
-            border: 1px solid var(--gold);
+            border: 2px solid var(--gold);
             color: var(--gold);
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
             border-radius: 50px;
-            transition: 0.4s;
+            transition: 0.3s;
         }
 
         .btn-next:hover {
@@ -83,93 +68,88 @@
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Taymer uslubi */
+        /* Taymer dizayni */
         .timer-container {
-            margin-top: 20px;
-            background: var(--glass);
+            margin-top: 40px;
             padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .timer-box span {
             display: block;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--gold);
         }
 
         .timer-box small {
             font-size: 0.7rem;
-            opacity: 0.6;
+            letter-spacing: 1px;
+            opacity: 0.7;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* Yurakchalar */
+        /* Yurakchalar animatsiyasi */
         .heart {
             position: absolute;
-            color: rgba(255, 77, 109, 0.6);
+            color: #ff4d6d;
             pointer-events: none;
-            animation: floatUp 4s linear infinite;
+            animation: float 4s linear infinite;
+            z-index: -1;
         }
 
-        @keyframes floatUp {
+        @keyframes float {
             to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
     <div class="step active" id="step1">
         <h1>Salom Go'zalim Madina! 👋</h1>
-        <p>Senga kichik bir syurpriz tayyorladim...</p>
-        <button class="btn-next" onclick="nextStep(2)">Davom eting</button>
+        <button class="btn-next" onclick="showNext()">Davom eting</button>
     </div>
 
     <div class="step" id="step2">
-        <h1>Madinam ✨</h1>
+        <h1 style="font-size: 2.5rem;">Madinam ❤️</h1>
         <p>Siz dunyodagi eng chiroyli va yagona qizsiz!</p>
         
-        <div style="font-style: italic; margin-bottom: 20px; opacity: 0.9;">
-            "Sen mening hayotimdagi eng go'zal mo''jizasan. Sening borliging dunyoni nurga to'ldiradi."
-        </div>
+        <p style="font-style: italic; font-size: 1.1rem; color: #f0f0f0;">
+            "Siz mening hayotimdagi eng go'zal mo''jizasiz. Har bir kunim siz bilan nurli va baxtli. Borligingiz uchun rahmat!"
+        </p>
 
         <div class="timer-container">
-            <div style="font-size: 0.8rem; letter-spacing: 1px;">BIZ BIRGAMIZ:</div>
-            <div class="timer-grid" id="timer">
+            <p style="font-size: 0.9rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px;">BIZ BIRGAMIZ:</p>
+            <div class="timer-grid" id="timerDisplay">
                 </div>
         </div>
-        
-        <p style="margin-top: 30px; font-size: 0.9rem; color: var(--gold);">Har doim yonimda bo'l ❤️</p>
     </div>
 
     <script>
-        // 1. Qadamlarni almashtirish funksiyasi
-        function nextStep(stepNumber) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + stepNumber).classList.add('active');
+        // Sahifani almashtirish funksiyasi
+        function showNext() {
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
             
-            if(stepNumber === 2) {
-                startHearts();
-                setInterval(updateTimer, 1000);
-            }
+            // Ikkinchi sahifa ochilganda yurakchalar va taymerni boshlash
+            startHearts();
+            setInterval(updateTimer, 1000);
         }
 
-        // 2. Taymer: 2024-yil 12-oktabr
-        const startDate = new Date(2024, 9, 12); // Yanvar=0, Oktabr=9
+        // Tanishgan sana: 2024-yil, 12-oktabr
+        // Eslatma: JSda oylar 0 dan boshlanadi (Oktabr = 9)
+        const startDate = new Date(2024, 9, 12, 0, 0, 0);
 
         function updateTimer() {
             const now = new Date();
@@ -180,9 +160,9 @@
             const mins = Math.floor((diff / (1000 * 60)) % 60);
             const secs = Math.floor((diff / 1000) % 60);
 
-            const timerDiv = document.getElementById("timer");
-            if(timerDiv) {
-                timerDiv.innerHTML = `
+            const display = document.getElementById("timerDisplay");
+            if (display) {
+                display.innerHTML = `
                     <div class="timer-box"><span>${days}</span><small>KUN</small></div>
                     <div class="timer-box"><span>${hours}</span><small>SOAT</small></div>
                     <div class="timer-box"><span>${mins}</span><small>DAQIQA</small></div>
@@ -191,7 +171,7 @@
             }
         }
 
-        // 3. Yurakchalar effekti
+        // Uchuvchi yurakchalar
         function startHearts() {
             setInterval(() => {
                 const heart = document.createElement('div');
@@ -202,7 +182,7 @@
                 heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 4000);
-            }, 400);
+            }, 300);
         }
     </script>
 </body>
