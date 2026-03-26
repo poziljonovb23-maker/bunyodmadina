@@ -24,37 +24,38 @@
             text-align: center;
         }
 
-        /* Sahifalar (Qadamlar) */
         .step {
-            display: none; /* Dastlab hamma yashirin */
-            padding: 20px;
+            display: none;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
             animation: fadeIn 1s ease forwards;
         }
 
         .active {
-            display: block; /* Faqat aktiv qadam ko'rinadi */
+            display: block;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             color: var(--gold);
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 1.3rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.8;
             margin-bottom: 30px;
+            font-weight: 300;
         }
 
-        /* Tugma dizayni */
         .btn-next {
-            padding: 15px 40px;
+            padding: 12px 35px;
             background: transparent;
-            border: 2px solid var(--gold);
+            border: 1px solid var(--gold);
             color: var(--gold);
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
@@ -68,39 +69,34 @@
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Taymer dizayni */
-        .timer-container {
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
+        /* Taymer stili */
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
         }
 
         .timer-box span {
             display: block;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--gold);
         }
 
         .timer-box small {
-            font-size: 0.7rem;
-            letter-spacing: 1px;
+            font-size: 0.6rem;
             opacity: 0.7;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Yurakchalar animatsiyasi */
         .heart {
             position: absolute;
             color: #ff4d6d;
@@ -112,44 +108,58 @@
         @keyframes float {
             to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
+
+        /* Mobil qurilmalar uchun moslashuv */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            p { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="step active" id="step1">
         <h1>Salom Go'zalim Madina! 👋</h1>
-        <button class="btn-next" onclick="showNext()">Davom eting</button>
+        <p>Siz uchun tayyorlangan kichik mo''jizaga xush kelibsiz.</p>
+        <button class="btn-next" onclick="next(2)">Davom eting</button>
     </div>
 
     <div class="step" id="step2">
-        <h1 style="font-size: 2.5rem;">Madinam ❤️</h1>
-        <p>Siz dunyodagi eng chiroyli va yagona qizsiz!</p>
-        
-        <p style="font-style: italic; font-size: 1.1rem; color: #f0f0f0;">
-            "Siz mening hayotimdagi eng go'zal mo''jizasiz. Har bir kunim siz bilan nurli va baxtli. Borligingiz uchun rahmat!"
-        </p>
+        <h1>Siz tanisiz... ✨</h1>
+        <p>Siz dunyodagi eng chiroyli va yagona qizsiz. Sizning tabassumingiz dunyoni yoritishga qodir.</p>
+        <button class="btn-next" onclick="next(3)">Yana bir gap...</button>
+    </div>
 
-        <div class="timer-container">
-            <p style="font-size: 0.9rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px;">BIZ BIRGAMIZ:</p>
-            <div class="timer-grid" id="timerDisplay">
-                </div>
-        </div>
+    <div class="step" id="step3">
+        <h1>Siz mening baxtimsiz ❤️</h1>
+        <p>Sizning qalbingiz shunchalik pok va samimiyligidan hayratdaman. Siz bilan o'tgan har bir soniya men uchun eng qadrli sovg'adir.</p>
+        <button class="btn-next" onclick="next(4)">Biz haqimizda...</button>
+    </div>
+
+    <div class="step" id="step4">
+        <h1>Madinam ❤️</h1>
+        <p>Siz mening hayotimdagi eng go'zal mo''jizasiz. Bizning hikoyamiz boshlanganiga ancha bo'ldi:</p>
+        
+        <div class="timer-grid" id="timerDisplay"></div>
+        
+        <p style="margin-top: 30px; font-style: italic; font-size: 0.9rem; color: var(--gold);">
+            2024-yil 12-oktabrdan beri sadoqat va mehr bilan...
+        </p>
     </div>
 
     <script>
-        // Sahifani almashtirish funksiyasi
-        function showNext() {
-            document.getElementById('step1').classList.remove('active');
-            document.getElementById('step2').classList.add('active');
+        function next(num) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + num).classList.add('active');
             
-            // Ikkinchi sahifa ochilganda yurakchalar va taymerni boshlash
-            startHearts();
-            setInterval(updateTimer, 1000);
+            if(num === 4) {
+                startHearts();
+                setInterval(updateTimer, 1000);
+            }
         }
 
-        // Tanishgan sana: 2024-yil, 12-oktabr
-        // Eslatma: JSda oylar 0 dan boshlanadi (Oktabr = 9)
-        const startDate = new Date(2024, 9, 12, 0, 0, 0);
+        // Sana: 2024-yil 12-oktabr
+        const startDate = new Date(2024, 9, 12); 
 
         function updateTimer() {
             const now = new Date();
@@ -171,7 +181,6 @@
             }
         }
 
-        // Uchuvchi yurakchalar
         function startHearts() {
             setInterval(() => {
                 const heart = document.createElement('div');
