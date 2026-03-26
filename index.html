@@ -8,7 +8,8 @@
     <style>
         :root {
             --gold: #d4af37;
-            --dark-bg: #0d1117;
+            --glass: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.2);
         }
 
         body {
@@ -17,19 +18,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--dark-bg);
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
             text-align: center;
         }
 
-        .step {
+        /* OYNA (CARD) STILI */
+        .window-card {
             display: none;
-            padding: 25px;
-            width: 90%;
-            max-width: 500px;
-            animation: fadeIn 1s ease forwards;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 40px 30px;
+            width: 85%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideIn 0.8s ease-out forwards;
         }
 
         .active {
@@ -41,6 +49,7 @@
             font-size: 2.8rem;
             color: var(--gold);
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         p {
@@ -48,52 +57,58 @@
             line-height: 1.8;
             margin-bottom: 30px;
             font-weight: 300;
+            color: #e0e0e0;
         }
 
+        /* TUGMA */
         .btn-next {
-            padding: 12px 35px;
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 0.9rem;
+            padding: 12px 40px;
+            background: var(--gold);
+            border: none;
+            color: black;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             cursor: pointer;
             border-radius: 50px;
             transition: 0.3s;
         }
 
         .btn-next:hover {
-            background: var(--gold);
-            color: black;
+            transform: scale(1.05);
             box-shadow: 0 0 20px var(--gold);
         }
 
-        /* Taymer stili */
+        /* TAYMER */
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-top: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 15px;
+        }
+
+        .timer-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 5px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
 
         .timer-box span {
             display: block;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--gold);
         }
 
         .timer-box small {
             font-size: 0.6rem;
-            opacity: 0.7;
+            opacity: 0.6;
+            text-transform: uppercase;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -101,84 +116,80 @@
             position: absolute;
             color: #ff4d6d;
             pointer-events: none;
-            animation: float 4s linear infinite;
+            animation: floatUp 4s linear infinite;
             z-index: -1;
         }
 
-        @keyframes float {
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Mobil qurilmalar uchun moslashuv */
         @media (max-width: 480px) {
             h1 { font-size: 2.2rem; }
-            p { font-size: 1rem; }
+            .window-card { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="step active" id="step1">
+    <div class="window-card active" id="win1">
         <h1>Salom Go'zalim Madina! 👋</h1>
-        <p>Siz uchun tayyorlangan kichik mo''jizaga xush kelibsiz.</p>
-        <button class="btn-next" onclick="next(2)">Davom eting</button>
+        <p>Siz uchun maxsus tayyorlangan ushbu mitti dunyoga xush kelibsiz. Sizni hayratda qoldirishga ruxsat bering...</p>
+        <button class="btn-next" onclick="toNext(2)">Davom eting</button>
     </div>
 
-    <div class="step" id="step2">
+    <div class="window-card" id="win2">
         <h1>Siz tanisiz... ✨</h1>
-        <p>Siz dunyodagi eng chiroyli va yagona qizsiz. Sizning tabassumingiz dunyoni yoritishga qodir.</p>
-        <button class="btn-next" onclick="next(3)">Yana bir gap...</button>
+        <p>Siz dunyodagi eng chiroyli va yagona qizsiz. Sizning kulgingiz men uchun eng shirin musiqa kabi yangraydi.</p>
+        <button class="btn-next" onclick="toNext(3)">Davom eting</button>
     </div>
 
-    <div class="step" id="step3">
+    <div class="window-card" id="win3">
         <h1>Siz mening baxtimsiz ❤️</h1>
-        <p>Sizning qalbingiz shunchalik pok va samimiyligidan hayratdaman. Siz bilan o'tgan har bir soniya men uchun eng qadrli sovg'adir.</p>
-        <button class="btn-next" onclick="next(4)">Biz haqimizda...</button>
+        <p>Sizning qalbingiz shunchalik pok va samimiyligidan hayratdaman. Siz bilan o'tgan har bir lahza men uchun bitmas-tuganmas boylikdir.</p>
+        <button class="btn-next" onclick="toNext(4)">Davom eting</button>
     </div>
 
-    <div class="step" id="step4">
+    <div class="window-card" id="win4">
         <h1>Madinam ❤️</h1>
-        <p>Siz mening hayotimdagi eng go'zal mo''jizasiz. Bizning hikoyamiz boshlanganiga ancha bo'ldi:</p>
+        <p>Siz mening hayotimdagi eng go'zal mo''jizasiz. Siz bilan birga o'tayotgan baxtli vaqtimiz:</p>
         
-        <div class="timer-grid" id="timerDisplay"></div>
+        <div class="timer-grid" id="timer"></div>
         
-        <p style="margin-top: 30px; font-style: italic; font-size: 0.9rem; color: var(--gold);">
-            2024-yil 12-oktabrdan beri sadoqat va mehr bilan...
+        <p style="margin-top: 30px; font-size: 0.8rem; color: var(--gold); opacity: 0.8;">
+            2024-yil 12-oktabrdan beri har bir soniyani qadrlaymiz...
         </p>
     </div>
 
     <script>
-        function next(num) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + num).classList.add('active');
+        function toNext(n) {
+            // Hamma oynalarni yopish
+            document.querySelectorAll('.window-card').forEach(w => w.classList.remove('active'));
+            // Kerakli oynani ochish
+            document.getElementById('win' + n).classList.add('active');
             
-            if(num === 4) {
+            if(n === 4) {
                 startHearts();
                 setInterval(updateTimer, 1000);
             }
         }
 
-        // Sana: 2024-yil 12-oktabr
-        const startDate = new Date(2024, 9, 12); 
+        const start = new Date(2024, 9, 12); // 12-oktabr
 
         function updateTimer() {
             const now = new Date();
-            const diff = now - startDate;
+            const diff = now - start;
+            const d = Math.floor(diff / (1000*60*60*24));
+            const h = Math.floor((diff / (1000*60*60)) % 24);
+            const m = Math.floor((diff / (1000*60)) % 60);
+            const s = Math.floor((diff / 1000) % 60);
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / (1000 * 60)) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
-
-            const display = document.getElementById("timerDisplay");
-            if (display) {
-                display.innerHTML = `
-                    <div class="timer-box"><span>${days}</span><small>KUN</small></div>
-                    <div class="timer-box"><span>${hours}</span><small>SOAT</small></div>
-                    <div class="timer-box"><span>${mins}</span><small>DAQIQA</small></div>
-                    <div class="timer-box"><span>${secs}</span><small>SONIYA</small></div>
-                `;
-            }
+            document.getElementById("timer").innerHTML = `
+                <div class="timer-box"><span>${d}</span><small>Kun</small></div>
+                <div class="timer-box"><span>${h}</span><small>Soat</small></div>
+                <div class="timer-box"><span>${m}</span><small>Min</small></div>
+                <div class="timer-box"><span>${s}</span><small>Sek</small></div>
+            `;
         }
 
         function startHearts() {
@@ -187,11 +198,11 @@
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.bottom = '-5vh';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.bottom = '-10vh';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 4000);
-            }, 300);
+            }, 350);
         }
     </script>
 </body>
